@@ -116,6 +116,30 @@
         footer { text-align: center; padding: 80px 0; background: #0284c7; color: #fff; }
         footer h2 { color: #fff; font-size: 36px; margin-bottom: 15px; }
         footer p { font-size: 18px; color: #e0f2fe; margin-bottom: 30px; }
+   /* --- ここからスマホ用レスポンシブ対応の追加コード --- */
+        @media (max-width: 768px) {
+            /* ヒーロー画像の文字サイズ調整 */
+            #hero h2 { font-size: 36px; }
+            #hero p { font-size: 18px; }
+
+            /* 提携メリットを縦並びに */
+            .benefits { flex-direction: column; }
+            
+            /* プロフィールカードを縦並び・中央揃えに */
+            .profile-card {
+                flex-direction: column; 
+                padding: 30px; 
+                gap: 30px; 
+                margin-top: -40px;
+            }
+            .profile-image-wrapper {
+                width: 160px; 
+                height: 160px;
+            }
+            .profile-text { text-align: center; }
+            .profile-text h2 { font-size: 26px; }
+        }
+        /* --- ここまでスマホ用レスポンシブ対応の追加コード --- */
     </style>
 </head>
 <body>
@@ -231,7 +255,7 @@
                 <span class="lang-en">Let's discuss how our seasonal lease model can benefit your rental business.</span>
                 <span class="lang-ja">弊社のシーズンリースモデルが貴社のビジネスにどう貢献できるか、ぜひご相談ください。</span>
             </p>
-            <a href="mailto:tsujio@global-snowgearlease.com" class="contact-btn">
+            <a href="mailto:tsujio@global-snowgear.com" class="contact-btn">
                 <span class="lang-en">Contact Us <i class="fa-solid fa-arrow-right btn-arrow"></i></span>
                 <span class="lang-ja">お問い合わせ <i class="fa-solid fa-arrow-right btn-arrow"></i></span>
             </a>
@@ -245,4 +269,5 @@
         }
     </script>
 </body>
+
 </html>

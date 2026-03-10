@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Snowgear Lease | Cross-Hemisphere Partners</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* 基本設定 */
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0;
+            color: #334155; line-height: 1.7; background-color: #f8fafc;
+        }
+        h1, h2, h3 { color: #0f172a; font-weight: 600; }
+        .container { width: 90%; max-width: 1100px; margin: auto; padding: 80px 0; }
+        
+        /* ヘッダー */
+        header {
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 1px 10px rgba(0,0,0,0.05);
+        }
+        header h1 { margin: 0; font-size: 20px; letter-spacing: 1.5px; text-transform: uppercase; color: #1e293b; }
+        
+        /* 言語切り替えボタン */
+        .lang-toggle {
+            background: #e2e8f0; color: #475569; border: none; padding: 8px 16px;
+            cursor: pointer; border-radius: 20px; font-size: 13px; font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle:hover { background: #0284c7; color: #fff; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(2, 132, 199, 0.2); }
+
+        /* 言語切り替えロジック */
+        .lang-ja { display: none; }
+        .lang-en { display: inline; }
+        body.ja-active .lang-ja { display: inline; }
+        body.ja-active .lang-en { display: none; }
+        h2 .lang-ja, h3 .lang-ja, div .lang-ja { display: none; }
+        body.ja-active h2 .lang-ja, body.ja-active h3 .lang-ja, body.ja-active div .lang-ja { display: block; }
+        body.ja-active h2 .lang-en, body.ja-active h3 .lang-en, body.ja-active div .lang-en { display: none; }
+
+        /* ヒーローセクション */
+        #hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.6)), url('images/snow.jpg') no-repeat center center/cover;
+            height: 70vh; color: #fff; display: flex; align-items: center; text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        #hero h2 { color: #fff; font-size: 52px; margin-bottom: 20px; font-weight: 700; letter-spacing: -1px; }
+        #hero p { font-size: 22px; font-weight: 300; max-width: 750px; margin: 0 auto 40px auto; color: #f1f5f9; }
+        
+        /* CTAボタン（矢印アニメーション付き） */
+        .hero-btn, .contact-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 16px 36px; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 30px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .hero-btn { background: #0284c7; color: #fff; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4); text-shadow: none; }
+        .hero-btn:hover { background: #0369a1; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(2, 132, 199, 0.5); }
+        .contact-btn { background: #fff; color: #0284c7; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .contact-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        
+        /* ボタン内の矢印の動き */
+        .btn-arrow { margin-left: 10px; transition: transform 0.3s ease; }
+        .hero-btn:hover .btn-arrow, .contact-btn:hover .btn-arrow { transform: translateX(6px); }
+
+        /* セクションタイトル */
+        .section-title { text-align: center; font-size: 36px; margin-bottom: 60px; color: #0f172a; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: #0284c7; margin: 15px auto 0; transition: width 0.4s ease; }
+        .container:hover .section-title::after { width: 100px; } /* コンテナにマウスが乗ると線が伸びる */
+
+        /* 提携メリット（アイコン連動アニメーション） */
+        .benefits { display: flex; justify-content: space-between; gap: 30px; }
+        .benefit-box {
+            background: #fff; padding: 40px 30px; border-radius: 12px; flex: 1; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #f1f5f9;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: default;
+        }
+        .benefit-box:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: #bae6fd; }
+        .benefit-icon { font-size: 40px; color: #0284c7; margin-bottom: 20px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .benefit-box:hover .benefit-icon { transform: scale(1.2) translateY(-5px); color: #0369a1; } /* アイコンが拡大して跳ねる */
+        .benefit-box h3 { font-size: 22px; margin-bottom: 15px; }
+
+        /* プロフィールカード */
+        #profile-section { background: #0f172a; position: relative; }
+        .profile-card {
+            background: #fff; border-radius: 16px; padding: 50px; display: flex; align-items: center; gap: 50px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25); margin-top: -80px; position: relative; z-index: 10;
+        }
+        
+        /* 画像のズームアニメーション設定 */
+        .profile-image-wrapper {
+            width: 220px; height: 220px; border-radius: 50%; border: 6px solid #f8fafc;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); flex-shrink: 0;
+            overflow: hidden; /* 枠外にはみ出た部分を隠す */
+            cursor: pointer;
+        }
+        .profile-image {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* 滑らかなズーム */
+        }
+        .profile-image-wrapper:hover .profile-image { transform: scale(1.1); } /* カーソルを合わせると1.1倍に */
+
+        .profile-text h2 { margin-top: 0; font-size: 32px; color: #0f172a; margin-bottom: 5px; }
+        .profile-text h3 { color: #0284c7; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+        .profile-text p { font-size: 16px; color: #475569; margin-bottom: 15px; }
+
+        /* フッター */
+        footer { text-align: center; padding: 80px 0; background: #0284c7; color: #fff; }
+        footer h2 { color: #fff; font-size: 36px; margin-bottom: 15px; }
+        footer p { font-size: 18px; color: #e0f2fe; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Global Snowgear Lease</h1>
+        <button class="lang-toggle" onclick="toggleLanguage()">🇯🇵 日本語 / 🇬🇧 EN</button>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h2>
+                <span class="lang-en">Maximizing Snow Asset Efficiency</span>
+                <span class="lang-ja">スノーアセットの運用効率を最大化</span>
+            </h2>
+            <p>
+                <span class="lang-en">Connecting the Northern and Southern Hemispheres through strategic, seasonal snow gear leasing.</span>
+                <span class="lang-ja">北半球と南半球の季節差を活かし、スノーギアの戦略的リースで両半球を繋ぎます。</span>
+            </p>
+            <a href="#contact-footer" class="hero-btn">
+                <span class="lang-en">Partner With Us <i class="fa-solid fa-arrow-right btn-arrow"></i></span>
+                <span class="lang-ja">提携について相談する <i class="fa-solid fa-arrow-right btn-arrow"></i></span>
+            </a>
+        </div>
+    </section>
+
+    <section id="about" style="background: #fff;">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="lang-en">The Seasonal Advantage</span>
+                <span class="lang-ja">季節差を活かしたアドバンテージ</span>
+            </h2>
+            <p style="text-align: center; max-width: 800px; margin: auto; font-size: 18px; color: #475569;">
+                <span class="lang-en">We provide a unique B2B leasing model that rotates premium ski and snowboard equipment between the Northern and Southern Hemispheres. By leveraging the opposite winter seasons, we ensure high-quality gear is always in action, maximizing profitability for our local resort partners in Australia and New Zealand.</span>
+                <span class="lang-ja">弊社は、北半球と南半球間で高品質なスキー・スノーボード機材を循環させる独自のB2Bリースモデルを提供します。季節が逆転する環境を活用することで機材を常に稼働させ、オーストラリアやニュージーランドの提携リゾート・レンタルショップ様の収益を最大化します。</span>
+            </p>
+        </div>
+    </section>
+
+    <section id="benefits" class="container">
+        <div class="benefits">
+            <div class="benefit-box">
+                <i class="fa-solid fa-arrows-rotate benefit-icon"></i>
+                <h3>
+                    <span class="lang-en">Zero Idle Time</span>
+                    <span class="lang-ja">稼働率の最大化</span>
+                </h3>
+                <p>
+                    <span class="lang-en">Equipments are fully utilized year-round, eliminating off-season storage costs and depreciation of idle assets.</span>
+                    <span class="lang-ja">オフシーズン中の保管コストや機材の遊休による価値低下を排除し、年間を通じて機材をフル活用します。</span>
+                </p>
+            </div>
+            <div class="benefit-box">
+                <i class="fa-regular fa-gem benefit-icon"></i>
+                <h3>
+                    <span class="lang-en">Premium Quality</span>
+                    <span class="lang-ja">高品質な機材提供</span>
+                </h3>
+                <p>
+                    <span class="lang-en">We supply well-maintained, high-end Japanese and global brand gear tailored to your specific rental shop needs.</span>
+                    <span class="lang-ja">日本の高品質な機材やグローバルブランドのギアを、貴社のニーズに合わせてメンテナンス済みの状態で提供します。</span>
+                </p>
+            </div>
+            <div class="benefit-box">
+                <i class="fa-regular fa-handshake benefit-icon"></i>
+                <h3>
+                    <span class="lang-en">Flexible Partnership</span>
+                    <span class="lang-ja">柔軟な提携モデル</span>
+                </h3>
+                <p>
+                    <span class="lang-en">Whether you need warehouse space optimization or a full fleet for the winter, our lease terms are designed for your business scale.</span>
+                    <span class="lang-ja">倉庫スペースの有効活用から、冬季のフルフリート提供まで、ビジネスの規模に合わせた柔軟なリース条件をご提案します。</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="profile-section">
+        <div class="container">
+            <div class="profile-card">
+                <div class="profile-image-wrapper">
+                    <img src="images/face.jpg" alt="Tatsumasa Tsujio" class="profile-image">
+                </div>
+                <div class="profile-text">
+                    <h2>
+                        <span class="lang-en">Tatsumasa Tsujio</span>
+                        <span class="lang-ja">辻尾 辰将</span>
+                    </h2>
+                    <h3>
+                        <span class="lang-en">Project Founder</span>
+                        <span class="lang-ja">プロジェクト代表</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Based in Osaka, Japan. With a robust background in corporate sales and as a securities dealer at Japan's largest trust bank, combined with ongoing academic policy research at Osaka University, Tatsumasa provides a highly reliable solution where stringent financial efficiency and operational excellence coexist in global asset leasing.</span>
+                        <span class="lang-ja">日本・大阪を拠点としています。日本最大の信託銀行での法人営業および証券ディーラーの経験と、現在大阪大学での特任研究員としての知見を融合。グローバルなアセットリースにおいて、高い金融効率と高い信頼性が共存したソリューションを提供します。</span>
+                    </p>
+                    <p style="font-weight: 600; color: #0f172a;">
+                        <span class="lang-en">We are currently looking for trustworthy local partners in Australia and New Zealand for our upcoming Proof of Concept phase.</span>
+                        <span class="lang-ja">現在はPoC（実証実験）フェーズに向け、オーストラリアおよびニュージーランドで信頼できる現地のパートナー企業様を探しています。</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact-footer">
+        <div class="container" style="padding: 40px 0;">
+            <h2>
+                <span class="lang-en">Ready to Optimize Your Winter Fleet?</span>
+                <span class="lang-ja">冬季シーズンの機材最適化をご検討ですか？</span>
+            </h2>
+            <p>
+                <span class="lang-en">Let's discuss how our seasonal lease model can benefit your rental business.</span>
+                <span class="lang-ja">弊社のシーズンリースモデルが貴社のビジネスにどう貢献できるか、ぜひご相談ください。</span>
+            </p>
+            <a href="mailto:tsujio@global-snowgearlease.com" class="contact-btn">
+                <span class="lang-en">Contact Us <i class="fa-solid fa-arrow-right btn-arrow"></i></span>
+                <span class="lang-ja">お問い合わせ <i class="fa-solid fa-arrow-right btn-arrow"></i></span>
+            </a>
+            <p style="margin-top: 60px; font-size: 13px; color: #bae6fd;">&copy; 2026 Global Snowgear Lease. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleLanguage() {
+            document.body.classList.toggle('ja-active');
+        }
+    </script>
+</body>
+</html>
